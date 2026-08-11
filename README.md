@@ -16,6 +16,7 @@ Add `-g` to install user-level instead of per-project. Update later with
 
 | Skill | Invoke | Description |
 |-------|--------|-------------|
+| [bro](skills/bro/) | `/bro` | Snap a verbose agent into concise mode — lead with the answer, technical English, no padding. Rules stay active for the session. |
 | [papercuts](skills/papercuts/) | `/papercuts` | Post-task retrospective on codebase friction — what made the job harder than it needed to be, reported as a ranked table of concrete fixes. |
 
 Each skill's directory has its own README with usage details.
