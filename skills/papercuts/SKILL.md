@@ -40,6 +40,10 @@ detour:
 
 ## What NOT to report
 
+- **Anything already fixed.** If the friction was resolved during the session
+  (by you or the user), it is not a papercut — the table is a to-do list of
+  open, actionable items only. At most, note fixed items in one summary line
+  below the table ("also hit and fixed: X, Y"); never give them a row.
 - The inherent difficulty of the task itself.
 - Style preferences with no confusion cost ("I'd have used X library").
 - Friction from your own tooling or the harness, unless the repo could
@@ -73,5 +77,6 @@ For each papercut (aim for the real handful, not a padded list):
    file the fix belongs in.
 
 Rank by expected recurrence: the papercut every future agent will hit goes
-first. If nothing meaningfully slowed you down, say so plainly — a forced list
-of trivia dilutes the signal.
+first. Every row must be open and actionable — something the user could fix
+right now. If nothing meaningfully slowed you down, say so plainly — a forced
+list of trivia dilutes the signal.
