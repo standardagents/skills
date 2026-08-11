@@ -3,21 +3,30 @@
 Agent skills from the [Standard Agents](https://standardagents.ai) team, for
 Claude Code, Codex, and any tool that reads `SKILL.md` packages.
 
-Install with the [skills CLI](https://skills.sh/):
+Install any skill with the [skills CLI](https://skills.sh/):
 
 ```bash
-npx skills add standardagents/skills@papercuts
+npx skills add standardagents/skills@<skill>
 ```
+
+Add `-g` to install user-level instead of per-project. Update later with
+`npx skills update`.
 
 ## Skills
 
-| Skill | Description |
-|-------|-------------|
-| [papercuts](skills/papercuts/SKILL.md) | Post-task retrospective on codebase friction — what made the job harder than it needed to be (stale docs, misleading names, duplicated config, lying tooling), reported as a ranked table of concrete fixes. |
+| Skill | Invoke | Description |
+|-------|--------|-------------|
+| [papercuts](skills/papercuts/) | `/papercuts` | Post-task retrospective on codebase friction — what made the job harder than it needed to be, reported as a ranked table of concrete fixes. |
 
-## Usage
+Each skill's directory has its own README with usage details.
 
-Invoke after a work session, typically as `/papercuts`. The skill reports
-findings only — it never edits files unless you ask afterward. Output is a
-ranked table (Papercut / Cost / Fix) designed to be scannable in under a
-minute; see [the example report](skills/papercuts/references/example.md).
+## Troubleshooting
+
+If Claude Code doesn't see a skill after a global install, the CLI may have
+skipped the Claude symlink. Create it manually:
+
+```bash
+ln -s ~/.agents/skills/<skill> ~/.claude/skills/<skill>
+```
+
+Or reinstall with the agent forced: `npx skills add -g -a claude-code standardagents/skills@<skill>`.
