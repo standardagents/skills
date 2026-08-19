@@ -30,6 +30,12 @@ with fewer ownership boundaries, state transitions, failure modes, and
 coordination paths. File count and line count are weak proxies for complexity;
 use the system's behavior and operating burden as the primary measures.
 
+## Example
+
+Read the [organization issue-sync example](references/organization-issue-sync.md)
+when a concrete before-and-after case would help calibrate the reduction. Use
+its reasoning pattern with the current artifact's requirements and evidence.
+
 ## Revise the artifact
 
 Produce the simplified version in the form the user needs. Edit authorized
