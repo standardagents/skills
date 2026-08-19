@@ -18,6 +18,7 @@ Add `-g` to install user-level instead of per-project. Update later with
 |-------|--------|-------------|
 | [bro](skills/bro/) | `/bro` | Snap a verbose agent into concise mode — lead with the answer, technical English, no padding. Rules stay active for the session. |
 | [papercuts](skills/papercuts/) | `/papercuts` | Post-task retrospective on codebase friction — what made the job harder than it needed to be, reported as a ranked table of concrete fixes. |
+| [streamline](skills/streamline/) | `/streamline` | Reduce unnecessary complexity in technical plans and implementations while preserving current requirements and safeguards. |
 
 Each skill's directory has its own README with usage details.
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Streamline"
+  short_description: "Reduce technical complexity while preserving requirements"
+  default_prompt: "Use $streamline to simplify this technical artifact into the smallest maintainable design that meets its requirements."
