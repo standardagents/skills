@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Quality Setup"
+  short_description: "Set up durable repository quality guardrails"
+  default_prompt: "Use $code-quality-setup to establish this repository’s quality rules and enforcement rails without modifying application code."
