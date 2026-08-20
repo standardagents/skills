@@ -36,12 +36,24 @@ Favor small components with explicit inputs, outputs, ownership, and failure
 behavior. Use composition, delegation, and data flow where the language offers
 them. Keep side effects at visible boundaries.
 
-## Source limits
+## File cohesion and source size
 
-Define maintainable limits for authored files, modules, functions, and source
-line width where the stack can enforce them reliably. Exclude generated and
-vendored code explicitly. Treat a size violation as a signal to extract a
-cohesive responsibility during later engineering work.
+Keep each authored file or module focused on one coherent concern. Code for a
+different concern belongs in an existing module that owns that concern or in a
+new module with a clear responsibility that can accommodate related growth.
+Utilities and other supporting concerns should be imported through explicit
+interfaces. Code that changes together should remain together.
+
+Use about 1,500 lines as a general guidance baseline for an authored source
+file when the repository has no more suitable threshold. Crossing the baseline
+prompts a cohesion review. Shorter files also warrant review when they combine
+unrelated behavior, while a cohesive file may justify a larger size. Any
+extraction should establish meaningful ownership for the resulting modules.
+
+Define mechanical limits for authored files, modules, functions, and source
+line width only where they produce a stable, low-noise signal. Exclude generated
+and vendored code explicitly. Repository conventions and language ecosystems
+may justify different thresholds.
 
 ## Tests with behavioral value
 

@@ -18,7 +18,7 @@ calibration for setup scope.
 This skill may change:
 
 - `AGENTS.md`, `CLAUDE.md` symlinks, and dedicated quality documentation;
-- formatter, linter, type-checker, and source-limit configuration;
+- formatter, linter, type-checker, and source-size configuration;
 - quality check scripts and dedicated enforcement code;
 - CI, release, and build wiring that invokes those checks.
 
@@ -69,7 +69,10 @@ The section must tell future agents to:
   operational needs;
 - favor fast feedback, low ceremony, DRY ownership, composition, and explicit
   dependencies;
-- keep authored files and modules within the repository's defined limits;
+- keep each authored file and module focused on one coherent concern;
+- move unrelated behavior to an existing owner or a new module with a clear
+  responsibility;
+- use the repository's source-size guidance as a prompt for cohesion review;
 - write tests around behavior, contracts, state transitions, and failure
   modes;
 - reserve exact string assertions for cases where text is the contract;
@@ -84,8 +87,10 @@ quality document when the detail cannot fit cleanly in `AGENTS.md`.
 ## Build the enforcement rails
 
 Use stack-native mechanisms for standards with reliable mechanical signals.
-Common candidates are formatting, linting, type checking, authored source
-size, generated-file consistency, dependency boundaries, tests, and builds.
+Common candidates are formatting, linting, type checking, authored source-size
+signals, generated-file consistency, dependency boundaries, tests, and builds.
+Keep file cohesion in agent instructions and review guidance because line count
+cannot identify mixed responsibilities.
 
 Give the repository one canonical quality command. Make local use, CI, and
 release validation call that command when the existing project state supports

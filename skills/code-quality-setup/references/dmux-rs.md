@@ -38,7 +38,7 @@ setup scope.
 ## Expected trajectory
 
 Future agents read the quality contract and use the canonical command. They
-keep new modules within the configured limit and address findings as part of
-ordinary feature, bug, and refactoring work. A later task can extract cohesive
-responsibilities from `main.rs` and strengthen enforcement without changing
-the setup skill.
+use the configured size limit as a cohesion-review signal and address findings
+as part of ordinary feature, bug, and refactoring work. A later task can move
+unrelated responsibilities from `main.rs` into modules with clear ownership
+and strengthen enforcement without changing the setup skill.
