@@ -60,3 +60,28 @@ part of the normative specification.
 
 If you cannot reach the site, tell the user. Label anything you then say from
 memory as unverified.
+
+## 4. Choose tool history from the agent's objective
+
+Read the selected version's prompt reference and tool-loop example before writing a prompt that uses tools.
+Set `includePastTools` on every prompt that has tools, so the definition records the choice.
+The specification defaults the flag to `false`.
+With `false`, each request omits assistant tool calls and tool results, including those of the running turn.
+`includeChat: true` alone does not include tool history.
+
+Choose `true` when a later step must read a tool result:
+
+- The prompt calls a tool, reads its result, and then answers or acts on it.
+- The prompt chains calls, and one call's input comes from an earlier result.
+- The prompt calls a blocking subagent and answers from its result.
+
+Choose `false` when the objective does not need earlier results in the request:
+
+- The side ends its turn at the tool call, for example through a stop tool.
+- The tools only cause side effects, such as logging or notifying, and the reply does not depend on their output.
+- The results reach the model another way, such as a hook that injects a summary or a subagent result that arrives as a message.
+- Large or sensitive tool output must stay out of later requests to save context or limit exposure.
+
+A prompt that loops on tools with `false` may repeat calls until `maxSteps`.
+State that the default belongs to the specification.
+Check the runtime's execution limits before describing a sub-prompt as a loop.
