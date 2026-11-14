@@ -44,7 +44,7 @@ new module with a clear responsibility that can accommodate related growth.
 Utilities and other supporting concerns should be imported through explicit
 interfaces. Code that changes together should remain together.
 
-Use about 1,500 lines as a general guidance baseline for an authored source
+Use about 3,000 lines as a general guidance baseline for an authored source
 file when the repository has no more suitable threshold. Crossing the baseline
 prompts a cohesion review. Shorter files also warrant review when they combine
 unrelated behavior, while a cohesive file may justify a larger size. Any
