@@ -11,7 +11,8 @@ quality work for later tasks.
 
 Read [the shared standards](references/standards.md) before setup. Read [the
 dmux-rs example](references/dmux-rs.md) when the repository needs a concrete
-calibration for setup scope.
+calibration for setup scope, and [cleanup waves](references/cleanup-waves.md)
+when handing off follow-up debt reduction to later tasks.
 
 ## Boundary
 
@@ -69,10 +70,14 @@ The section must tell future agents to:
   operational needs;
 - favor fast feedback, low ceremony, DRY ownership, composition, and explicit
   dependencies;
-- keep each authored file and module focused on one coherent concern;
+- keep each authored file and module focused on one coherent concern, with a
+  1-line top-of-file ownership header on new non-test files;
 - move unrelated behavior to an existing owner or a new module with a clear
-  responsibility;
-- use the repository's source-size guidance as a prompt for cohesion review;
+  responsibility, grouping crowded source directories into domain
+  subdirectories, avoiding grab-bag names (`helpers`, `utils`, `common`,
+  `misc`), and keeping the filesystem aligned with the module graph;
+- use the repository's source-size guidance (preferring non-test line counts
+  for source files) as a prompt for cohesion review;
 - write tests around behavior, contracts, state transitions, and failure
   modes;
 - reserve exact string assertions for cases where text is the contract;
@@ -80,27 +85,48 @@ The section must tell future agents to:
   symlink convention;
 - run the canonical quality command before delivery.
 
-Keep the section short enough that future agents will read it. Put detailed
-project-specific mechanics in existing tool configuration or one dedicated
-quality document when the detail cannot fit cleanly in `AGENTS.md`.
+Keep root `AGENTS.md` concise (around 200 lines or fewer) so future agents
+read all of it. Put detailed procedures in trigger-linked docs ("read X before
+doing Y") or existing tool configuration, and add nested `AGENTS.md` files (with
+sibling `CLAUDE.md` symlinks) only for high-churn subtrees or distinct runtime
+boundaries.
 
 ## Build the enforcement rails
 
 Use stack-native mechanisms for standards with reliable mechanical signals.
-Common candidates are formatting, linting, type checking, authored source-size
-signals, generated-file consistency, dependency boundaries, tests, and builds.
-Keep file cohesion in agent instructions and review guidance because line count
-cannot identify mixed responsibilities.
+Common candidates are formatting, linting, type checking, non-test source-size
+and layout checks, `AGENTS.md`/`CLAUDE.md` symlink integrity, generated-file
+consistency, dependency boundaries, tests, and builds. Keep file cohesion in
+agent instructions and review guidance because line count cannot identify mixed
+responsibilities.
 
 Give the repository one canonical quality command. Make local use, CI, and
 release validation call that command when the existing project state supports
-required enforcement. Preserve one implementation of each check.
+required enforcement. Preserve one implementation of each check. Discover repo
+scripts and configs dynamically (for example via globs) in validation hooks
+rather than maintaining hardcoded lists that miss new files.
 
-When a newly configured check reports existing application findings, leave the
-checker and its command in place for later project work. Keep currently green
-required workflows green until the project adopts that check. Do not add
-suppressions, allowlists, exception ledgers, or source edits to make the check
-pass.
+Prefer a fast (<1s), zero-compiler pre-push structural ratchet (written in a
+scripting runtime the repository already uses) with diff-scoped (`branch`),
+full-tree (`--full`), and debt-reporting (`--audit`) modes:
+
+- enforce strict rules on newly added files (non-test line ceiling, 1-line
+  ownership header, domain-subdirectory placement when a source directory is
+  already crowded, no grab-bag filenames, and no module-path overrides);
+- enforce a per-branch growth cap (for example `+80` non-test lines) on
+  existing oversized files so active feature branches stay grandfathered
+  without exception ledgers;
+- verify `AGENTS.md`/`CLAUDE.md` symlink parity on every push, not only in slow
+  CI or release checks.
+
+Update CI and test change-detection filters so edits to `AGENTS.md` and
+`CLAUDE.md` at any depth do not trigger full builds or test suites.
+
+When a newly configured check reports existing application findings that cannot
+be ratcheted by diff, leave the checker and its command in place for later
+project work. Keep currently green required workflows green until the project
+adopts that check. Do not add suppressions, allowlists, exception ledgers, or
+source edits to make the check pass.
 
 Add the minimum files required by the current stack. Avoid a generic quality
 framework, a new package, or a new task runner when existing project tools can
